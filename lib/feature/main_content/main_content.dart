@@ -50,7 +50,16 @@ class MainContentState extends ConsumerState<MainContent> {
                     child: Text('WebViewPage'),
                   ),
                 ),
-                Text('$counter'),
+                SizedBox(
+                  width: double.infinity,
+                  height: 44,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      _showDialog();
+                    },
+                    child: Text('幅広Dialog'),
+                  ),
+                ),
                 Text('data2'),
                 Text('data3'),
               ],
@@ -58,6 +67,33 @@ class MainContentState extends ConsumerState<MainContent> {
           ),
         ),
       ),
+    );
+  }
+
+  void _showDialog() {
+    showDialog(
+      barrierDismissible: true,
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          insetPadding: EdgeInsets.only(left: 16, right: 16),
+          title: Text("タイトル"),
+          content: SizedBox(
+            width: MediaQuery.sizeOf(context).width,
+            child: Text("メッセージ内容"),
+          ),
+          actions: [
+            TextButton(
+              child: Text("Cancel"),
+              onPressed: () => Navigator.pop(context),
+            ),
+            TextButton(
+              child: Text("OK"),
+              onPressed: () => Navigator.pop(context),
+            ),
+          ],
+        );
+      },
     );
   }
 }
