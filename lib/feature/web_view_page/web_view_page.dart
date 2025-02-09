@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sample/feature/web_view_page/web_view_page_state.dart';
 
 class WebViewPage extends ConsumerStatefulWidget {
@@ -29,6 +30,10 @@ class WebViewPageState extends ConsumerState<WebViewPage> {
     final webViewVisible = ref.watch(webViewPageStateProvider);
     return Scaffold(
       appBar: AppBar(
+        leading: BackButton(onPressed: () {
+          stateProvider.goBack();
+          context.pop();
+        }),
         title: Text('WebView'),
       ),
       body: SafeArea(
@@ -53,9 +58,9 @@ class WebViewPageState extends ConsumerState<WebViewPage> {
                 child: ElevatedButton(
                   onPressed: () {
                     stateProvider.goBack();
-                    Navigator.pop(context);
+                    context.pop();
                   },
-                  child: Text('hogehoge'),
+                  child: Text('戻ってみる'),
                 ),
               ),
             )
